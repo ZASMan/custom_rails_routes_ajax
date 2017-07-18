@@ -39,6 +39,16 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def reassign_project
+    employee = Employee.find(params[:id])
+    project_params = params[:project_id]
+    project_id = project_params[:id]
+    employee.update_attribute(:project_id, project_id)
+    respond_to do |format|
+      format.js { render layout: false, locals: { employee: employee } }
+    end
+  end
+
   # DELETE /employees/1
   def destroy
     @employee.destroy

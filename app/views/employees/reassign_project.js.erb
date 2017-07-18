@@ -1,0 +1,4 @@
+// Removes div which contains the employee information
+var employee_id = "<%= employee.id %>";
+var info_for_employee_element = document.getElementById("info_for_employee_" + employee_id);
+info_for_employee_element.parentNode.removeChild(info_for_employee_element);
