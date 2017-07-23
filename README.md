@@ -12,15 +12,19 @@ The relationships between the employee and project models are as follows:
 
 app/models/project.rb
 
-```class Project < ActiveRecord::Base
+```
+class Project < ActiveRecord::Base
   has_many :employees
-end```
+end
+```
 
 app/models/employee.rb
 
-```class Employee < ActiveRecord::Base
+```
+class Employee < ActiveRecord::Base
   belongs_to :project
-end```
+end
+```
 
 TODO: Add a screenshot of the employees page and some markup here 
 
@@ -40,27 +44,32 @@ Well, it's not the BEST acceptance criteria, but it tells you, as the developer,
 
 Let's take a look at our config/routes.rb file. It looks something like this:
 
-```Rails.application.routes.draw do
+```
+Rails.application.routes.draw do
   resources :employees
   resources :projects
-end```
+end
+```
 
 Let's define our new action as a member route. It's pretty simple to do. And since the user wants to 'reassign' an employee to a new project, why not call it, reassign_project?
 
-```Rails.application.routes.draw do
+```
+Rails.application.routes.draw do
   resources :employees do
     member do
       post :reassign_project
     end
   end
   resources :projects
-end```
+end
+```
 
 Save the file, head over to your command line, and type in rake routes. You should see the new route you added there!
 
 Now let's head over to our controller and begin defining the new action. Before solving the problem, let's write out some comments to remind ourselves what a controller action will need.
 
-```class EmployeesController < ApplicationController
+```
+class EmployeesController < ApplicationController
   def reassign_project
     # 1. We will need to access the individual employee project we'll modify as a variable
     # 2. We'll need to access the individual project that the employee will be updated with as a variable
@@ -69,14 +78,15 @@ Now let's head over to our controller and begin defining the new action. Before 
     #    The user requested that they stay on the same page. That means, the response to the user's
     #    action shouldn't redirect us to a new page, because they want to keep going after this one!
   end
-end```
+end
+```
 
 In case you're a beginner who's only used the standard RESTFUL routes and are kind of sketchy with understanding parameters and such, let's take things step by step to get all the data we need.
 
 TODO: Go to the view, talk a little bit about console logging, how to get params, how to create an erb js partial as a response, etc.
 
-```Final controller action:
-
+Final controller action:
+```
 class EmployeesController < ApplicationController
   def reassign_project
     employee = Employee.find(params[:id])
@@ -87,12 +97,15 @@ class EmployeesController < ApplicationController
       format.js { render layout: false, locals: { project: project } }
     end
   end
-end```
+end
+```
+
 TODO: Now talk about creating a feature test with rspec, capybara, and capybara webkit to simulate the action of visiting the page, reassigning a project, and inspecting the objects for updated attributes.
 
 Final feature spec can look something like this:
 
-```Rspec.feature 'Projects - Index Page' do
+```
+Rspec.feature 'Projects - Index Page' do
   describe 'Reassigning employees to new project' do
     it 'allows user to reassign employee' do
       Project.delete_all
@@ -112,7 +125,8 @@ Final feature spec can look something like this:
       
     end
   end
-end```
+end
+```
 
 
 ## Getting Started 
