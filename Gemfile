@@ -3,6 +3,7 @@ source "https://rubygems.org"
 ruby "2.4.0"
 
 gem "autoprefixer-rails"
+gem "bootstrap-sass"
 gem "delayed_job_active_record"
 gem "flutie"
 gem "honeybadger"
