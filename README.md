@@ -21,6 +21,7 @@ app/models/employee.rb
 ```class Employee < ActiveRecord::Base
   belongs_to :project
 end```
+
 TODO: Add a screenshot of the employees page and some markup here 
 
 Now, time to address the problem from a business needs standpoint. The user would like the ability to change the projects their employees are assigned to in a more efficient manner. Essentially, they find it time consuming to visit the /employeesindex view, clicking the 'edit' link to view an individual employee's edit page, changing the project they are assigned to, hitting save, and then going back and repeating the process. That's a few clicks too many! 
@@ -39,10 +40,11 @@ Well, it's not the BEST acceptance criteria, but it tells you, as the developer,
 
 Let's take a look at our config/routes.rb file. It looks something like this:
 
-Rails.application.routes.draw do
+```Rails.application.routes.draw do
   resources :employees
   resources :projects
-end
+end```
+
 Let's define our new action as a member route. It's pretty simple to do. And since the user wants to 'reassign' an employee to a new project, why not call it, reassign_project?
 
 ```Rails.application.routes.draw do
@@ -68,6 +70,7 @@ Now let's head over to our controller and begin defining the new action. Before 
     #    action shouldn't redirect us to a new page, because they want to keep going after this one!
   end
 end```
+
 In case you're a beginner who's only used the standard RESTFUL routes and are kind of sketchy with understanding parameters and such, let's take things step by step to get all the data we need.
 
 TODO: Go to the view, talk a little bit about console logging, how to get params, how to create an erb js partial as a response, etc.
